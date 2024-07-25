@@ -7,6 +7,7 @@ import logging
 import os
 import sys
 from configparser import ConfigParser as CP
+from pathlib import Path
 
 from fusesoc.librarymanager import Library
 
@@ -81,7 +82,7 @@ class Config:
             xdg_cache_home = os.environ.get("XDG_CACHE_HOME") or os.path.join(
                 os.path.expanduser("~"), ".cache"
             )
-            self.cache_root = os.path.join(xdg_cache_home, "fusesoc")
+            self.cache_root = str(Path(xdg_cache_home) / "fusesoc")
             os.makedirs(self.cache_root, exist_ok=True)
         if not cores_root and os.path.exists("cores"):
             cores_root = [os.path.abspath("cores")]
